@@ -9,7 +9,7 @@ module ActiveRecord::Acts::List::CallbackDefiner #:nodoc:
       after_destroy :decrement_positions_on_lower_items, unless: Proc.new { destroyed_via_scope? || act_as_list_no_update? }
 
       before_update :check_scope, unless: :act_as_list_no_update?
-      after_update :update_positions, unless: :act_as_list_no_update?
+      after_update_commit :update_positions, unless: :act_as_list_no_update?
 
       after_commit :clear_scope_changed
 
